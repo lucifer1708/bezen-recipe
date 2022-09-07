@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '&$1*c!po+ac8l489msbtw!9)flt8b)&8by+s5%q)t5*v@&0l1j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -30,6 +30,12 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'jazzmin',
+    'authentication',
+    'widget_tweaks',
+    'ckeditor',
+    'recipes',
+    'crispy_forms',
+    'materializecssform',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -155,3 +161,5 @@ JAZZMIN_SETTINGS = {
 }
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_URL = '/auth/login/'

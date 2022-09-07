@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load materializecss %}
+{% block home %}
+<div>
+<div class="container py-5">
+  {% if user.is_authenticated %}
+<h1>welcome to home "{{user.username}}"</h1>
+{% else %}
+<h1>Kindly login to see whats here</h1>
+{% endif %}
+</div>
+</div>
+{% endblock %}

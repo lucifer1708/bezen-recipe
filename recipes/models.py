@@ -1,0 +1,30 @@
+from django.db import models
+from ckeditor.fields import RichTextField
+from django.urls import reverse
+from datetime import date
+from django.contrib.auth.models import User
+from django.utils.text import slugify
+# Create your models here.
+
+
+class Recipe(models.Model):
+    title = models.CharField(max_length=1000)
+    author = models.ForeignKey(User,
+                               on_delete=models.SET_NULL,
+                               related_name='user',
+                               null=True)
+    ingredients = models.CharField(max_length=100000000000, null=True)
+    thumbnail = models.ImageField(upload_to='images_recipes/')
+    content = RichTextField()
+    slug = models.SlugField(unique=True, null=True)
+    post_date = models.DateField(default=date.today)
+
+    def save(self, *args, **kwargs):
+        self.slug = self.slug or slugify(self.title)
+        super().save(*args, **kwargs)
+
+    class Meta:
+        ordering = ["-post_date"]
+
+    def __str__(self):
+        return self.title
