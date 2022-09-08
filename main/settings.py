@@ -28,6 +28,8 @@ ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = [
     'https://foodrecipe.azurewebsites.net/',
     'http://foodrecipe.azurewebsites.net/',
+    'https://foodrecipe.azurewebsites.net',
+    'http://foodrecipe.azurewebsites.net',
 ]
 # Application definition
 
