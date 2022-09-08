@@ -1,11 +1,19 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.views import generic
 from .forms import RecipeForm
 from .models import Recipe
-from django.urls import reverse_lazy
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 # Create your views here.
+
+
+def handler_404(request, exceptions):
+    return render(request, '404.html')
+
+
+def handler_500(request):
+    return render(request, '500.html')
 
 
 def home(request):
@@ -37,7 +45,7 @@ class RecipeDetail(generic.DetailView):
 class RecipeCreateView(LoginRequiredMixin, generic.CreateView):
     form_class = RecipeForm
     template_name = "recipe/create.html"
-    success_url = reverse_lazy('user-recipe-list')
+    success_url = '/my_recipes'
     login_url = '/auth/login/'
 
     def form_valid(self, form):
@@ -49,28 +57,32 @@ class RecipeDeleteView(LoginRequiredMixin, UserPassesTestMixin,
                        generic.DeleteView):
     model = Recipe
     template_name = 'recipe/recipe_delete.html'
-    success_url = '/'
+    success_url = '/my_recipes'
     slug_url_kwarg = 'the_slug'
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        else:
+            return False
 
 
 class RecipeEditView(LoginRequiredMixin, generic.UpdateView):
     model = Recipe
     form_class = RecipeForm
     template_name = "recipe/edit.html"
-    success_url = reverse_lazy('user-recipe-list')
+    success_url = '/my_recipes'
     slug_url_kwarg = 'the_slug'
 
 
-class RecipeUserList(generic.ListView):
-    model = Recipe
-    context_object_name = 'recipes'
-    template_name = 'recipe/recipe_user_list.html'
-
-    def get_queryset(self):
-        query = self.request.GET.get('q')
-        if query:
-            object_list = self.model.objects.filter(
-                Q(title__icontains=query) | Q(ingredients__icontains=query))
-        else:
-            object_list = self.model.objects.all()
-        return object_list
+@login_required()
+def my_recipe(request):
+    user_recipe = []
+    user_recipe = Recipe.objects.filter(author=request.user)
+    return render(request=request,
+                  template_name='recipe/recipe_user_list.html',
+                  context={
+                      'user': request.user,
+                      'recipes': user_recipe
+                  })

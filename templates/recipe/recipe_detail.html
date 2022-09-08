@@ -1,8 +1,137 @@
 {% extends 'base.html' %}
 {% block content %}
-<p>
-{{recipe.title}}
-{{recipe.thumbnail|safe}}
-{{recipe.content|safe}}
-</p>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  nav .brand-logo {
+    position: absolute;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 33px;
+    padding: 0;
+  }
+
+  nav ul a {
+    -webkit-transition: background-color .3s;
+    transition: background-color .3s;
+    font-size: 16px;
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 0 15px;
+    <!-- cursor: pointer; -->
+  }
+
+  h1.heading {
+    font-size: 3vw !important;
+    text-align: center;
+    color: white;
+  }
+
+  div.top {
+    display: flex;
+    border: 1px solid rgb(38 166 154);
+    padding: 0;
+    background-color: #abb8c320;
+  }
+
+  div.image,
+  div.desc {
+    flex: none;
+    width: 50%;
+    backdrop-filter: blur(10px);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  div.image img {
+    transform: scale(1.5);
+    width: 100%;
+    height: 100%;
+
+  }
+
+  ul.ingredients {
+    width: 30%;
+    margin: auto;
+  }
+
+  p.owner {
+    float: right;
+    background: rgb(38 166 154);
+    width: max-content;
+    margin-right: 10px;
+    padding: 2px 6px;
+    color: white;
+    border-radius: 5px;
+    text-transform: uppercase;
+  }
+
+  h3.owner {
+    border-bottom: 3px solid rgb(38 166 154);
+    padding-bottom: 10px;
+    width: 30%;
+    margin: auto;
+  }
+
+  h4.process {
+    padding: 50px;
+    border-top: 20px solid rgb(38 166 154);
+    border-bottom: 20px solid rgb(38 166 154);
+  }
+
+  @media only screen and (max-width: 950px) {
+    div.top {
+      display: block;
+    }
+
+    div.image,
+    div.desc {
+      flex: none;
+      width: 100%;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    h1.heading {
+      font-size: 6vw !important;
+    }
+  }
+</style>
+<div class="container py-5" style="margin-top: 70px;">
+  <div class="container top">
+    <div class="image">
+      <img src="{{recipe.thumbnail.url}}" alt="">
+    </div>
+    <div class="desc my-5">
+      <h1 class="heading">{{recipe.title}}</h1>
+      <h3 class="owner">{{recipe.category}}</h3>
+      <hr>
+      <br>
+      <h2 style="color: #c9c8c8;">Ingredients</h2>
+      <br>
+      <ul class="list-group ingredients" style="color: black;" id="ingredients">
+      </ul>
+      <br>
+      <p class="owner mx-5">by:{{recipe.author}}</p>
+    </div>
+  </div>
+  <br><br>
+  <div class="recipe">
+    <h1 class="heading">The Process</h1>
+    <h4 class="process" style="text-align: justify;">{{recipe.content|safe}}</h4>
+  </div>
+  <h2 class="my-5" style="text-align:center; color: #c1c1c1;">Thank you for reading {{recipe.author}}'s Recipe</h2>
+</div>
+
+<script>
+  ingredients = "{{recipe.ingredients}}";
+  list = ingredients.split(',');
+  console.log(list);
+  ul = document.getElementById('ingredients');
+  for (var x = 0; x < list.length; x++) {
+    ul.innerHTML += "<li class='list-group-item' style='color:black;'>" + list[x] + "</li>"
+  }
+</script>
+
 {% endblock %}

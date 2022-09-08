@@ -1,6 +1,6 @@
 from django.db import models
 from ckeditor.fields import RichTextField
-from django.urls import reverse
+from django.db.models.fields import uuid
 from datetime import date
 from django.contrib.auth.models import User
 from django.utils.text import slugify
@@ -12,11 +12,12 @@ class Recipe(models.Model):
     author = models.ForeignKey(User,
                                on_delete=models.SET_NULL,
                                related_name='user',
-                               null=True)
+                               null=True,
+                               blank=True)
     ingredients = models.CharField(max_length=100000000000, null=True)
     thumbnail = models.ImageField(upload_to='images_recipes/')
     content = RichTextField()
-    slug = models.SlugField(unique=True, null=True)
+    slug = models.SlugField(unique=True)
     post_date = models.DateField(default=date.today)
 
     def save(self, *args, **kwargs):
