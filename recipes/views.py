@@ -75,6 +75,10 @@ class RecipeEditView(LoginRequiredMixin, generic.UpdateView):
     success_url = '/my_recipes'
     slug_url_kwarg = 'the_slug'
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
 
 @login_required()
 def my_recipe(request):

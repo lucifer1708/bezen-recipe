@@ -21,6 +21,8 @@ body {
 }
 .container img {
   width: 300px;
+  margin-top: auto;
+  margin-bottom: auto;
   height: 300px;
   border-radius: 10px 0 0 10px;
 }
@@ -142,4 +144,3 @@ body {
   font-weight: bold;
   font-size: 1.2rem;
 }
-

@@ -27,7 +27,7 @@
     outline: none;
     overflow: hidden;
     padding: 0 25px;
-    position: relative;
+    position: absolute;
     text-align: center;
     text-transform: none;
     transform: translateZ(0);
@@ -35,9 +35,10 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-    width: 30%;
-    left: -127px;
-    bottom: -69px;
+    width: 16%;
+    z-index: 100;
+    left: 356px;
+    bottom: -20px;
   }
 
   .button-9:disabled {
@@ -66,16 +67,17 @@
     overflow: hidden;
     padding: 0 20px;
     pointer-events: auto;
-    position: relative;
+    position: absolute;
     text-align: center;
     touch-action: manipulation;
     user-select: none;
     -webkit-user-select: none;
     vertical-align: top;
     white-space: nowrap;
-    width: 30%;
-    left: -116px;
-    bottom: -84px;
+    height: 44px;
+    width: 16%;
+    left: 530px;
+    bottom: -20px;
     z-index: 9;
     border: 0;
     transition: box-shadow .2s;
@@ -105,16 +107,16 @@
     <img src="{{i.thumbnail.url}}" />
     <div class="container__text">
       <h1 style="font-size: 37px; color: black;">{{i.title}}</h1>
-      <p style="color: black; font-size: 19px;">
+      <p style="color: black; font-size: 18px;">
         <strong style="font-weight: bolder;">Ingredients:</strong>
         {{i.ingredients}}
       </p>
       <div class="container__text__timing">
         <u>
-          <h5 style="color: black;">Author: <strong>{{i.author}}</strong></h5>
+          <h5 style="color: black; margin-bottom: 20px;">Author: <strong>{{i.author}}</strong></h5>
         </u>
-<input class="button-9" type="button" onclick="location.href='/recipes/{{i.slug}}/delete';" value="Delete" />
-<input class="button-42" type="button" onclick="location.href='/recipes/{{i.slug}}/edit';" value="Edit" />
+        <input class="button-9" type="button" onclick="location.href='/recipes/{{i.slug}}/delete';" value="Delete" />
+        <input class="button-42" type="button" onclick="location.href='/recipes/{{i.slug}}/edit';" value="Edit" />
       </div>
       <a href="/recipes/{{i.slug}}">
         <button class="btn">view recipe <i class="fa fa-arrow-right"></i></button>
