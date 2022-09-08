@@ -17,7 +17,7 @@ class Recipe(models.Model):
     ingredients = models.CharField(max_length=100000000000, null=True)
     thumbnail = models.ImageField(upload_to='images_recipes/')
     content = RichTextField()
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, default=uuid.uuid1)
     post_date = models.DateField(default=date.today)
 
     def save(self, *args, **kwargs):

@@ -35,5 +35,5 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
 
-handler404 = 'recipes.views.handler_404'
-handler500 = 'recipes.views.handler_500'
+handler404 = 'recipes.views.error_404_view'
+handler500 = 'recipes.views.error_500_view'

@@ -8,12 +8,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 # Create your views here.
 
 
-def handler_404(request, exceptions):
-    return render(request, '404.html')
+def error_404_view(request, exception):
+    return render(request, "404.html")
 
 
-def handler_500(request):
-    return render(request, '500.html')
+def error_500_view(request):
+    return render(request, "500.html")
 
 
 def home(request):
