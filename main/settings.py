@@ -24,6 +24,8 @@ SECRET_KEY = '&$1*c!po+ac8l489msbtw!9)flt8b)&8by+s5%q)t5*v@&0l1j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+APPEND_SLASH = True
+
 ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = [
     'https://foodrecipe.azurewebsites.net/',
@@ -173,5 +175,6 @@ CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
         'height': 300,
-        'width': 1200, },
+        'width': 1200,
+    },
 }

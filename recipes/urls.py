@@ -5,13 +5,13 @@ app_name = "recipes"
 
 urlpatterns = [
     path("", views.home, name="home"),
-    path('recipes/create', views.RecipeCreateView.as_view()),
+    path('recipes/create/', views.RecipeCreateView.as_view()),
     path("recipes/<slug:the_slug>/edit/",
          views.RecipeEditView.as_view(),
          name="edit"),
-    path("recipes", views.RecipeList.as_view(), name="recipe"),
+    path("recipes/", views.RecipeList.as_view(), name="recipe"),
     path('my_recipes/', views.my_recipe, name='user-recipe-list'),
-    path("recipes/<slug:the_slug>",
+    path("recipes/<slug:the_slug>/",
          views.RecipeDetail.as_view(),
          name="recipe-detail"),
     path("recipes/<slug:the_slug>/delete/",
